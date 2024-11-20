@@ -4,9 +4,10 @@ Created on Mon Nov  4 18:35:23 2024
 
 @author: UOU
 """
-
+import os
 import cv2
 import numpy as np
+
 
 # Parameters for drawing
 drawing = False  # True if the mouse is pressed
@@ -72,10 +73,18 @@ def segment_image(image_path):
             print("Annotations cleared")
         elif key == ord("q"):
             break
+        # 키 입력 대기
+        key = cv2.waitKey(0)
+
+       if key == ord('n'):  # 'n' 키를 누르면 다음 이미지로
+           current_index = (current_index + 1) % len(image_files)  # 인덱스 순환
+       elif key == 27:  # ESC 키를 누르면 종료
+           break
 
     cv2.destroyAllWindows()
 
 # Example usage
 if __name__ == "__main__":
-    PathNames = r"D:\02_Lectures\2024_2nd\Lecture_Materials\SW_Dev\Project\val2017\val2017"
-    segment_image(PathNames + "//000000000285.jpg")
+    PathNames = r"C:\Users\cic\Documents\clone_2\Image_dataset"
+    segment_image(PathNames + "//000000057027.jpg")
+
